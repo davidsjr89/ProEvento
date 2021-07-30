@@ -50,10 +50,13 @@ namespace API
             }
 
             //app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors(x => 
+                            x.AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {

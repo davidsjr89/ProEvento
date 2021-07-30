@@ -1,12 +1,10 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
-
 # compiled output
 /dist
 /tmp
 /out-tsc
 
 # dependencies
-/node_modules
+/frontend/App/node_modules
 
 # IDEs and editors
 /.idea
@@ -24,6 +22,7 @@
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+.history/*
 
 # misc
 /.sass-cache
@@ -66,3 +65,9 @@ msbuild.err
 msbuild.wrn
 
 .vs/
+
+# Only exists if Bazel was run
+/bazel-out
+
+# profiling files
+chrome-profiler-events*.json
