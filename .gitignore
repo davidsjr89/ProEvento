@@ -71,3 +71,8 @@ msbuild.wrn
 
 # profiling files
 chrome-profiler-events*.json
+
+#Excluindo DB
+*.db
+*.db-shm
+*.db-wal
