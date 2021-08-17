@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Domain;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Application.Contratos;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
+using Application.Dtos;
 
 namespace API.Controllers
 {
@@ -25,6 +23,7 @@ namespace API.Controllers
             {
                 var eventos = await _eventoService.GetAllEventosAsync(true);
                 if (eventos == null) return NotFound("Nenhum evento encontrado");
+                
 
                 return Ok(eventos);
             }
@@ -64,12 +63,12 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Post(Evento model)
+        public async Task<IActionResult> Post(EventoDto model)
         {
             try
             {
                 var evento = await _eventoService.AddEventos(model);
-                if (evento == null) return BadRequest("Erro ao tentar adicionar evento");
+                if (evento == null) return NotFound();
 
                 return Ok(evento);
             }
@@ -79,12 +78,12 @@ namespace API.Controllers
             }
         }
         [HttpPut("id")]
-        public async Task<IActionResult> Put(int id, Evento model)
+        public async Task<IActionResult> Put(int id, EventoDto model)
         {
             try
             {
                 var evento = await _eventoService.UpdateEventos(id, model);
-                if (evento == null) return BadRequest("Erro ao tentar atualizar evento");
+                if (evento == null) return NotFound();
 
                 return Ok(evento);
             }
@@ -98,10 +97,9 @@ namespace API.Controllers
         {
             try
             {
-               if( await _eventoService.DeleteEventos(id))
-                   return Ok("Deletado");
-               else
-                    return BadRequest("Evento não deletado");
+               return await _eventoService.DeleteEventos(id) ?
+                Ok("Deletado") : 
+                BadRequest("Evento não deletado");
             }
             catch (System.Exception ex)
             {

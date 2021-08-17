@@ -1,3 +1,4 @@
+using System;
 using Application;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,7 +11,7 @@ using Persistence.Contexto;
 using Application.Contratos;
 using Persistence.Interface;
 using Persistence;
-
+using AutoMapper;
 namespace API
 {
     public class Startup
@@ -35,6 +36,7 @@ namespace API
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IEventosService, EventoService>();
             services.AddScoped<IGeralPersist, GeralPersist>();
             services.AddScoped<IEventoPersist, EventoPersist>();
