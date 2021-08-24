@@ -3,11 +3,12 @@ using Application.Contratos;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using Application.Dtos;
+using Microsoft.AspNetCore.Cors;
 
 namespace API.Controllers
 {
-    [ApiController]
     [Route("[controller]")]
+    [ApiController]
     public class EventosController : ControllerBase
     {
         private readonly IEventosService _eventoService;
@@ -77,7 +78,7 @@ namespace API.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar adicionar evento. Erro: {ex.Message}");
             }
         }
-        [HttpPut("id")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, EventoDto model)
         {
             try
@@ -92,14 +93,15 @@ namespace API.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar atualizar eventos. Erro: {ex.Message}");
             }
         }
-        [HttpDelete("id")]
+        
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
-               return await _eventoService.DeleteEventos(id) ?
-                Ok("Deletado") : 
-                BadRequest("Evento não deletado");
+               return await _eventoService.DeleteEventos(id) 
+               ? Ok(new { message = "Deletado"})
+               : throw new System.Exception("Ocorreu um problema especifico ");
             }
             catch (System.Exception ex)
             {

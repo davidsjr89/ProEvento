@@ -17,7 +17,7 @@ namespace Persistence.Migrations
                     DataEvento = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Tema = table.Column<string>(type: "TEXT", nullable: true),
                     QtdPessoas = table.Column<int>(type: "INTEGER", nullable: false),
-                    ImageURL = table.Column<string>(type: "TEXT", nullable: true),
+                    ImagemURL = table.Column<string>(type: "TEXT", nullable: true),
                     Telefone = table.Column<string>(type: "TEXT", nullable: true),
                     Email = table.Column<string>(type: "TEXT", nullable: true)
                 },

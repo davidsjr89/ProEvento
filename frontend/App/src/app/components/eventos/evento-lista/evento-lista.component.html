@@ -39,16 +39,16 @@
       <tbody *ngIf="eventos && eventos.length">
         <tr *ngFor="let evento of eventosFiltrados" (click)="detalheEvento(evento.id)" style="cursor: pointer;">
           <td class="d-none d-md-table-cell">
-            <img [collapse]="exibirImagem" [isAnimated]="true" src="/assets/{{evento.imageURL}}" [style.width.px]="150">
+            <img [collapse]="exibirImagem" [isAnimated]="true" src="/assets/{{evento.imagemURL}}" [style.width.px]="150">
           </td>
           <td>{{evento.id}}</td>
           <td>{{evento.tema}}</td>
           <td class="d-none d-md-table-cell">{{evento.local}}</td>
-          <td>{{evento.dataEvento | datetimeformatpipe}}</td>
+          <td>{{evento.dataEvento | datetimeformatpipe }}</td>
           <td class="d-none d-md-table-cell">{{evento.qtdPessoas}}</td>
-          <td class="d-none d-md-table-cell">{{evento.lotes.length> 0 ? evento.lotes[0].nome : 'Não informado'}}</td>
+          <td class="d-none d-md-table-cell">{{evento.lotes[0]?.nome}}</td>
           <td class="linha">
-            <button type="button" class="btn btn-danger btn-lg" tooltip="Deletar" (click)="openModal(template)"><i
+            <button type="button" class="btn btn-danger btn-lg" tooltip="Deletar" (click)="openModal($event, template, evento.id)"><i
                 class="fa fa-trash"></i></button>
           </td>
         </tr>
@@ -67,7 +67,7 @@
   
   <ng-template #template>
     <div class="modal-body text-center">
-      <p>Você deseja deletar Lote?</p>
+      <p>Você deseja deletar o Evento de código {{this.eventoId}}?</p>
       <button type="button" class="btn btn-default" (click)="confirm()">Sim</button>
       <button type="button" class="btn btn-primary" (click)="decline()">Não</button>
     </div>
