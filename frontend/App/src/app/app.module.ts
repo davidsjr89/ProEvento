@@ -20,7 +20,7 @@ import { ptBrLocale } from 'ngx-bootstrap/locale';
 
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
+import { NgxCurrencyModule } from "ngx-currency";
 
 import { DatetimeformatPipe } from './helpers/datetimeformat.pipe';
 
@@ -75,7 +75,8 @@ defineLocale('pt-br', ptBrLocale);
       preventDuplicates: true,
       progressBar: true,
     }),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxCurrencyModule
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

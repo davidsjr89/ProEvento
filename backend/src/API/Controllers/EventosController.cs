@@ -3,7 +3,6 @@ using Application.Contratos;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using Application.Dtos;
-using Microsoft.AspNetCore.Cors;
 
 namespace API.Controllers
 {
