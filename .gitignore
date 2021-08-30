@@ -63,7 +63,7 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
-
+Resources/
 .vs/
 
 # Only exists if Bazel was run

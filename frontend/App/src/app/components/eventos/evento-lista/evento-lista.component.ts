@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Evento } from '@app/models/Evento';
 import { EventoService } from '@app/services/evento.service';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-evento-lista',
@@ -96,5 +97,11 @@ export class EventoListaComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  mostraImagem(imagemURL: string){
+    return (imagemURL !== null)
+            ? `${environment.imagemURL}${imagemURL}`
+            : 'assets/semImagem.jpg';
   }
 }

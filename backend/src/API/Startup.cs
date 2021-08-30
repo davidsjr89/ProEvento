@@ -1,3 +1,4 @@
+using System.IO;
 using System;
 using Application;
 using Microsoft.AspNetCore.Builder;
@@ -11,7 +12,7 @@ using Persistence.Contexto;
 using Application.Contratos;
 using Persistence.Interface;
 using Persistence;
-
+using Microsoft.Extensions.FileProviders;
 namespace API
 {
     public class Startup
@@ -73,6 +74,11 @@ namespace API
             app.UseCors(x => x.AllowAnyHeader()
                               .AllowAnyMethod()
                               .AllowAnyOrigin());
+
+            app.UseStaticFiles(new StaticFileOptions(){
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Resources")),
+                RequestPath = new Microsoft.AspNetCore.Http.PathString("/Resources")
+            });
 
             app.UseEndpoints(endpoints =>
             {
